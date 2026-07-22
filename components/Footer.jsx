@@ -1,74 +1,129 @@
-import Link from 'next/link';
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import Link from "next/link";
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal border-t border-gold/15 pt-16 pb-6 mt-20">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <footer className="relative mt-24 border-t border-yellow-500/20 bg-gradient-to-b from-black via-zinc-950 to-black">
+
+      {/* Top Section */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+        {/* Brand */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-9 h-9 rounded-full border border-gold/50 flex items-center justify-center">
-              <span className="font-display gold-text text-lg font-semibold">FP</span>
-            </span>
-            <span className="font-display text-xl tracking-widest text-bone">
-              FASHION <span className="gold-text">POINT</span>
-            </span>
-          </div>
-          <p className="text-bone/50 text-sm leading-relaxed">
-            Premium menswear for the modern gentleman. Style that defines you — every single day.
+          <h2 className="text-3xl font-bold text-white tracking-wider">
+            FASHION <span className="text-yellow-500">POINT</span>
+          </h2>
+
+          <p className="mt-5 text-gray-400 leading-7">
+            Luxury fashion crafted for modern lifestyle.
+            Premium quality, timeless elegance and unmatched style.
           </p>
-          <div className="flex gap-3 mt-5">
-            <a href="#" className="w-9 h-9 rounded-full border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-ink text-gold transition">
-              <Facebook size={16} />
+
+          <div className="flex gap-4 mt-8">
+            <a href="#" className="p-3 rounded-full border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black transition">
+              <Facebook size={18} />
             </a>
-            <a href="#" className="w-9 h-9 rounded-full border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-ink text-gold transition">
-              <Instagram size={16} />
+
+            <a href="#" className="p-3 rounded-full border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black transition">
+              <Instagram size={18} />
             </a>
-            <a href="#" className="w-9 h-9 rounded-full border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-ink text-gold transition">
-              <Twitter size={16} />
+
+            <a href="#" className="p-3 rounded-full border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black transition">
+              <Twitter size={18} />
             </a>
           </div>
         </div>
 
+        {/* Quick Links */}
         <div>
-          <h4 className="font-display text-lg text-gold mb-4">Quick Links</h4>
-          <ul className="space-y-2.5 text-sm text-bone/60">
-            <li><Link href="/" className="hover:text-gold transition">Home</Link></li>
-            <li><Link href="/shop" className="hover:text-gold transition">Shop</Link></li>
-            <li><Link href="/new-arrivals" className="hover:text-gold transition">New Arrivals</Link></li>
-            <li><Link href="/best-sellers" className="hover:text-gold transition">Best Sellers</Link></li>
-            <li><Link href="/about" className="hover:text-gold transition">About Us</Link></li>
-            <li><Link href="/contact" className="hover:text-gold transition">Contact Us</Link></li>
+          <h3 className="text-xl font-semibold text-yellow-500 mb-6">
+            Quick Links
+          </h3>
+
+          <ul className="space-y-3 text-gray-300">
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/shop">Shop</Link></li>
+            <li><Link href="/categories">Categories</Link></li>
+            <li><Link href="/new-arrivals">New Arrivals</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
 
+        {/* Categories */}
         <div>
-          <h4 className="font-display text-lg text-gold mb-4">Categories</h4>
-          <ul className="space-y-2.5 text-sm text-bone/60">
-            <li><Link href="/shop?category=shirts" className="hover:text-gold transition">Shirts</Link></li>
-            <li><Link href="/shop?category=tshirts" className="hover:text-gold transition">T-Shirts</Link></li>
-            <li><Link href="/shop?category=jeans" className="hover:text-gold transition">Jeans</Link></li>
-            <li><Link href="/shop?category=jackets" className="hover:text-gold transition">Jackets</Link></li>
-            <li><Link href="/shop?category=ethnic" className="hover:text-gold transition">Ethnic Wear</Link></li>
-            <li><Link href="/shop?category=accessories" className="hover:text-gold transition">Accessories</Link></li>
+          <h3 className="text-xl font-semibold text-yellow-500 mb-6">
+            Categories
+          </h3>
+
+          <ul className="space-y-3 text-gray-300">
+            <li><Link href="/shop?category=shirts">Shirts</Link></li>
+            <li><Link href="/shop?category=tshirts">T-Shirts</Link></li>
+            <li><Link href="/shop?category=jeans">Jeans</Link></li>
+            <li><Link href="/shop?category=jackets">Jackets</Link></li>
+            <li><Link href="/shop?category=accessories">Accessories</Link></li>
           </ul>
         </div>
 
+        {/* Contact */}
         <div>
-          <h4 className="font-display text-lg text-gold mb-4">Contact</h4>
-          <ul className="space-y-2.5 text-sm text-bone/60">
-            <li>+91 98765 43210</li>
-            <li>hello@fashionpoint.com</li>
-            <li>204 Linking Road, Bandra West, Mumbai 400050</li>
-            <li>Mon – Sun · 10:00 AM – 9:00 PM</li>
-          </ul>
+          <h3 className="text-xl font-semibold text-yellow-500 mb-6">
+            Contact
+          </h3>
+
+          <div className="space-y-4 text-gray-300">
+
+            <div className="flex gap-3">
+              <Phone className="text-yellow-500" size={18} />
+              <span>+91 98765 43210</span>
+            </div>
+
+            <div className="flex gap-3">
+              <Mail className="text-yellow-500" size={18} />
+              <span>hello@fashionpoint.com</span>
+            </div>
+
+            <div className="flex gap-3">
+              <MapPin className="text-yellow-500" size={18} />
+              <span>Mumbai, India</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      {/* Newsletter */}
+      <div className="border-t border-yellow-500/20">
+        <div className="max-w-5xl mx-auto px-6 py-10 text-center">
+
+          <h2 className="text-3xl font-bold text-white">
+            Join Our Newsletter
+          </h2>
+
+          <p className="text-gray-400 mt-3">
+            Get exclusive offers and new arrivals first.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="px-5 py-3 rounded-full bg-zinc-900 border border-yellow-500/30 text-white w-full sm:w-96 outline-none"
+            />
+
+            <button className="px-8 py-3 rounded-full bg-yellow-500 text-black font-bold hover:scale-105 transition">
+              Subscribe
+            </button>
+          </div>
+
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-bone/40">
-        <p>© {new Date().getFullYear()} FASHION POINT. All rights reserved.</p>
-        <p>Designed for the modern gentleman — crafted with care.</p>
+      {/* Bottom */}
+      <div className="border-t border-yellow-500/20 py-6 text-center text-gray-500 text-sm">
+        © {new Date().getFullYear()} Fashion Point • Luxury Edition • All Rights Reserved.
       </div>
+
     </footer>
   );
 }
