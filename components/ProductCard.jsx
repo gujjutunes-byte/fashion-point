@@ -4,75 +4,96 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Heart } from 'lucide-react';
+import { Heart, ShoppingCart, Zap } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import Stars from './Stars';
 
 export default function ProductCard({ product }) {
-  const [size, setSize] = useState(product.sizes[0]);
+  const [size, setSize] = useState(product.sizes?.[0] || '');
+
   const { addToCart } = useCart();
   const { toggleWishlist, isWishlisted } = useWishlist();
   const router = useRouter();
+
   const wished = isWishlisted(product.id);
 
-  function handleAddToCart(e) {
+  const handleAddToCart = (e) => {
     e.preventDefault();
     addToCart(product, size);
-  }
+  };
 
-  function handleBuyNow(e) {
+  const handleBuyNow = (e) => {
     e.preventDefault();
     addToCart(product, size, true);
     router.push('/checkout');
-  }
+  };
 
-  function handleWishlist(e) {
+  const handleWishlist = (e) => {
     e.preventDefault();
     toggleWishlist(product);
-  }
+  };
 
   return (
-    <div className="card-hover glass rounded-2xl overflow-hidden group relative">
+    <div className="group relative overflow-hidden rounded-3xl border border-yellow-500/20 bg-gradient-to-b from-zinc-900 to-black shadow-xl hover:shadow-yellow-500/20 transition-all duration-500 hover:-translate-y-2">
+
       {product.discount > 0 && (
-        <div className="ribbon absolute top-0 left-4 z-10 bg-gold text-ink text-[11px] font-bold px-3 pt-1 pb-2.5">
-          -{product.discount}%
+        <div className="absolute left-4 top-4 z-20 rounded-full bg-yellow-500 px-3 py-1 text-xs font-bold text-black">
+          -{product.discount}% OFF
         </div>
       )}
+
       <button
         onClick={handleWishlist}
-        aria-label="Toggle wishlist"
-        className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-ink/60 flex items-center justify-center text-bone hover:text-gold transition"
+        className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 backdrop-blur text-white hover:text-yellow-400"
       >
-        <Heart size={16} className={wished ? 'fill-gold text-gold' : ''} />
+        <Heart
+          size={18}
+          className={wished ? 'fill-yellow-400 text-yellow-400' : ''}
+        />
       </button>
 
-      <Link href={`/product/${product.id}`} className="block img-zoom aspect-[3/4] bg-slate relative">
+      <Link
+        href={`/product/${product.id}`}
+        className="relative block aspect-[3/4] overflow-hidden"
+      >
         <Image
           src={product.img}
           alt={product.name}
           fill
-          sizes="(max-width: 768px) 50vw, 25vw"
-          className="object-cover"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-      </Link>
+            </Link>
 
-      <div className="p-4">
-        <p className="text-[11px] tracking-widest text-gold/70">{product.category?.toUpperCase()}</p>
+      <div className="p-5">
+
+        <p className="mb-2 text-xs uppercase tracking-[0.3em] text-yellow-500">
+          {product.category}
+        </p>
+
         <Link href={`/product/${product.id}`}>
-          <h4 className="font-display text-lg text-bone leading-snug mt-0.5 mb-1 hover:text-gold transition">
+          <h3 className="text-xl font-bold text-white transition hover:text-yellow-400">
             {product.name}
-          </h4>
+          </h3>
         </Link>
-        <div className="mb-2">
+
+        <div className="mt-2">
           <Stars rating={product.rating} />
         </div>
-        <div className="flex items-center gap-2 mb-3">
-          <span className="font-display text-xl text-gold">₹{product.price}</span>
-          {product.mrp && <span className="text-bone/40 text-sm line-through">₹{product.mrp}</span>}
+
+        <div className="mt-4 flex items-center gap-3">
+          <span className="text-3xl font-bold text-yellow-400">
+            ₹{product.price}
+          </span>
+
+          {product.mrp && (
+            <span className="text-sm text-gray-500 line-through">
+              ₹{product.mrp}
+            </span>
+          )}
         </div>
 
-        <div className="flex flex-wrap gap-1.5 mb-3">
+        <div className="mt-5 flex flex-wrap gap-2">
           {product.sizes.map((s) => (
             <button
               key={s}
@@ -80,8 +101,10 @@ export default function ProductCard({ product }) {
                 e.preventDefault();
                 setSize(s);
               }}
-              className={`text-[10px] rounded px-1.5 py-0.5 border transition ${
-                size === s ? 'bg-gold text-ink border-gold' : 'border-gold/30 text-bone/60'
+              className={`rounded-full border px-3 py-1 text-xs transition ${
+                size === s
+                  ? 'border-yellow-500 bg-yellow-500 text-black'
+                  : 'border-gray-600 text-gray-300 hover:border-yellow-500'
               }`}
             >
               {s}
@@ -89,15 +112,26 @@ export default function ProductCard({ product }) {
           ))}
         </div>
 
-        <div className="flex gap-2">
-          <button onClick={handleAddToCart} className="flex-1 btn-outline rounded-full text-xs font-semibold py-2.5 tracking-wide">
+        <div className="mt-6 flex gap-3">
+
+          <button
+            onClick={handleAddToCart}
+            className="flex-1 flex items-center justify-center gap-2 rounded-full border border-yellow-500 py-3 text-sm font-semibold text-yellow-400 transition hover:bg-yellow-500 hover:text-black"
+          >
+            <ShoppingCart size={18} />
             Add to Cart
           </button>
-          <button onClick={handleBuyNow} className="flex-1 btn-gold rounded-full text-xs font-semibold py-2.5 tracking-wide">
+
+          <button
+            onClick={handleBuyNow}
+            className="flex-1 flex items-center justify-center gap-2 rounded-full bg-yellow-500 py-3 text-sm font-bold text-black transition hover:scale-105"
+          >
+            <Zap size={18} />
             Buy Now
           </button>
+
         </div>
       </div>
-    </div>
+          </div>
   );
 }
